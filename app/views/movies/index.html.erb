@@ -1,0 +1,30 @@
+<!-- <form action="/movies" method="GET">
+  <input class="form-control" type="text" name="query">
+</form> -->
+
+<%#= form_tag movies_path, method: :get do %>
+  <%#= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Find a movie"
+  %>
+<%# end %>
+
+<%= simple_form_for :search, url: movies_path, method: :get do |f| %>
+  <%= f.input :query, label: false, placeholder: "Find a movie" %>
+<% end %>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div id="movies" data-query="<%= @query %>">
+        <% @movies.each do |movie| %>
+          <h4 class="context"><%= movie.title %></h4>
+          <h6 class="context">Director: <%= movie.director.full_name %></h6>
+          <p class="context"><%= movie.syllabus %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
